@@ -14,8 +14,8 @@ const Header = () => {
             </Link>
             <nav className={styles.navigationMenu}>
                 <Link href=''>Movies</Link>
-                <Link href=''>Movies</Link>
-                <Link href=''>Movies</Link>
+                <Link href=''>Series</Link>
+                <Link href=''>Kids</Link>
             </nav>
         </div>
     </header>
