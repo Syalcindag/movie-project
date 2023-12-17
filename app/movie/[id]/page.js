@@ -1,13 +1,23 @@
 import MovieContainer from '@/containers/movie'
 import React from 'react'
-
-import Movies from '@/mocks/movies.json'
 import { notFound } from 'next/navigation'
 
-const MoviePage = ({params, searchParams}) => {
-  console.log(params)
-  const movieDetail = Movies.results.find(movie => movie.id.toString() === params.id);
+const API_URL = 'https://api.themoviedb.org/3';
+const OPTIONS = {
+  method: 'GET',
+  headers: {
+    accept: 'application/json',
+    Authorization: `Bearer ${process.env.ACCESS_TOKEN}`
+  }
+};
 
+const getMovie = async (movieId) => {
+  const res = await fetch(`${API_URL}/movie/${movieId}`, OPTIONS);
+  return res.json();
+}
+
+const MoviePage = async ({params, searchParams}) => {
+  const movieDetail = await getMovie(params.id);
   if (!movieDetail) {
     notFound();
   }
